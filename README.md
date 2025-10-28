@@ -1,7 +1,6 @@
 # FPGA-Based-Convolutional-Neural-Network-Accelerator
 
 
-Absolutely! Here’s an **enhanced and more professional version** of your GitHub README — formatted cleanly, visually structured, and more engaging for readers. It uses proper Markdown styling, headings, emojis, and concise yet impactful phrasing 👇
 
 ---
 
