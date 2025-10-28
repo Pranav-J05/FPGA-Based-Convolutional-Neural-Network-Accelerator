@@ -1,0 +1,35 @@
+`timescale 1ns / 1ps
+module AI_ENHANCER_FULL(
+	input clk,
+    input rst,
+    input enable,
+    input signed [8*9-1:0] pixel_window,
+    input signed [8*9-1:0] kernel,
+    output signed [31:0] pooled_out,
+    output done
+    );
+	     wire signed [31:0] conv_out;
+		  wire signed [31:0] relu_out;
+			cnn conv_inst (
+        .clk(clk),
+        .rst(rst),
+        .enable(enable),
+        .pixel_window(pixel_window),
+        .kernel(kernel),
+        .conv_out(conv_out),
+        .done(done)
+    );
+			relu relu_inst (
+        .x_in(conv_out),
+        .x_out(relu_out)
+    );
+	 max_pool_2x2 pool_inst (
+        .in0(relu_out),
+        .in1(relu_out),
+        .in2(relu_out),
+        .in3(relu_out),
+        .max_out(pooled_out)
+    );
+
+
+endmodule
