@@ -1,0 +1,43 @@
+`timescale 1ns / 1ps
+
+module cnn_tb;
+    reg clk;
+    reg rst;
+    reg enable;
+    reg signed [71:0] pixel_window; // 9 x 8 bits packed
+    reg signed [71:0] kernel;
+    wire signed [31:0] conv_out;
+    wire done;
+	     // Instantiate convolution module
+    cnn uut (
+        .clk(clk),
+        .rst(rst),
+        .enable(enable),
+        .pixel_window(pixel_window),
+        .kernel(kernel),
+        .conv_out(conv_out),
+        .done(done)
+    );
+    // Clock generation
+    initial clk = 0;
+    always #5 clk = ~clk;
+
+    initial begin
+        rst = 1; enable = 0; pixel_window = 0; kernel = 0;
+        #20;
+        rst = 0;
+		          // Assign pixels (1 to 9)
+        pixel_window = {8'd1, 8'd2, 8'd3, 8'd4, 8'd5, 8'd6, 8'd7, 8'd8, 8'd9};
+        // Assign kernel (edge detection pattern)
+        kernel = {8'd1, 8'd0, -8'd1, 8'd1, 8'd0, -8'd1, 8'd1, 8'd0, -8'd1};
+
+        enable = 1;
+		          wait(done == 1);          // Wait for convolution done
+        @(posedge clk);           // Wait one more clock edge for conv_out update
+        enable = 0;
+
+        $display("Convolution output: %d", conv_out);
+        #20;
+        $stop;
+    end
+endmodule
