@@ -1,0 +1,14 @@
+module max_pool_2x2 (
+    input signed [31:0] in0,
+    input signed [31:0] in1,
+    input signed [31:0] in2,
+    input signed [31:0] in3,
+    output reg signed [31:0] max_out
+);
+    always @(*) begin
+        max_out = in0;
+        if (in1 > max_out) max_out = in1;
+        if (in2 > max_out) max_out = in2;
+        if (in3 > max_out) max_out = in3;
+    end
+endmodule
