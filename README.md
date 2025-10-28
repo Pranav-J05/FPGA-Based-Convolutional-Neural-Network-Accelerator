@@ -1,63 +1,125 @@
 # FPGA-Based-Convolutional-Neural-Network-Accelerator
 
 
+⚙️ FPGA-Based Convolutional Neural Network (CNN) Accelerator
 
-Overview
-This project implements a simple Convolutional Neural Network (CNN) hardware accelerator on FPGA using Verilog. The accelerator includes core CNN operations:
+🚀 Overview
 
-3x3 Convolution layer
+This project implements a hardware-accelerated Convolutional Neural Network (CNN) on an FPGA using Verilog HDL.
+It demonstrates real-time image feature extraction using three fundamental CNN operations — Convolution, ReLU activation, and Max Pooling — all realized in synthesizable RTL.
 
-ReLU activation function
+🧠 Core Features
 
-2x2 Max Pooling layer
+* 🧩 Modular Verilog Design – Clean, parameterized modules for each CNN operation
+* 🔁 Pipeline Integration – End-to-end data flow through convolution, activation, and pooling
+* ⚡ Synthesizable RTL – Verified for FPGA implementation using Xilinx ISE
+* 🧪 Functional Testbenches – Behavioral simulation and validation of CNN output
+* 🖼️ Hardware Image Processing – Demonstrates real-time CNN inference on FPGA hardware
 
-It is designed and tested using Xilinx ISE, demonstrating image feature extraction in hardware.
+---
 
-Features
-Modular and synthesizable Verilog design
+🏗️ Architecture Overview
 
-RTL modules for convolution, ReLU, and max pooling
+The accelerator performs CNN computation in three key stages:
 
-End-to-end top-level integration
+| Stage               | Module           | Description                                                                           |
+| ------------------- | ---------------- | ------------------------------------------------------------------------------------- |
+| **1️⃣ Convolution** | `conv3x3.v`      | Performs 3×3 convolution on 8-bit pixel inputs and kernel weights over 9 clock cycles |
+| **2️⃣ Activation**  | `relu.v`         | Applies ReLU: outputs 0 for negatives, passes positives unchanged                     |
+| **3️⃣ Pooling**     | `max_pool_2x2.v` | Executes 2×2 max pooling to reduce feature map size                                   |
 
-Testbenches for functional verification
+All modules are integrated in `cnn_pipeline.v` to form the complete CNN data path.
 
-Designed for real-time CNN inference on FPGAs
+---
 
-Directory Structure:
-conv3x3.v           # 3x3 convolution module  
-relu.v              # ReLU activation module  
-max_pool_2x2.v      # 2x2 max pooling module  
-cnn_pipeline.v      # Top-level module integrating all components  
-tb_cnn_pipeline.v   # Testbench for the integrated pipeline  
+📂 Directory Structure
 
+```
+FPGA-Based-CNN-Accelerator/
+│
+├── conv3x3.v          # 3x3 Convolution module
+├── relu.v             # ReLU activation module
+├── max_pool_2x2.v     # 2x2 Max pooling module
+├── cnn_pipeline.v     # Top-level CNN pipeline integration
+├── tb_cnn_pipeline.v  # Testbench for full CNN pipeline
+└── README.md          # Project documentation
+```
 
-Getting Started
-Prerequisites
-Xilinx ISE (or compatible FPGA synthesis and simulation tools)
+---
 
-Basic understanding of Verilog HDL and digital design
+🧰 Getting Started
 
-Setup
-Create a new project in Xilinx ISE targeting your FPGA device.
+🖥️ Prerequisites
 
-Add all Verilog files listed above to the project.
+* Xilinx ISE (or compatible FPGA toolchain)
+* Basic understanding of Verilog HDL and digital system design
 
-Set cnn_pipeline.v as the top-level module for synthesis and simulation.
+⚙️ Setup Instructions
 
-Add tb_cnn_pipeline.v as the simulation top module to run behavioral simulations.
+1. Create a new project in Xilinx ISE targeting your FPGA board.
+2. Add all Verilog source files listed above.
+3. Set `cnn_pipeline.v` as the top-level module for synthesis.
+4. Set `tb_cnn_pipeline.v` as the *simulation top module.
 
-Running Simulation
-Run behavioral simulation on tb_cnn_pipeline.v.
+---
 
-Verify that the pooled output matches expected results as printed in the simulation console.
+### ▶️ Running Simulation
 
-Module Descriptions
-conv3x3.v
-Performs a 3x3 convolution on 8-bit pixel inputs and kernel weights over 9 clock cycles.
+1. Run **behavioral simulation** on `tb_cnn_pipeline.v`.
+2. Observe the **output feature map** in the simulation console.
+3. Verify that the **pooled output** matches expected CNN results.
 
-relu.v
-Implements the ReLU activation function that outputs zero for negative inputs and passes positive inputs unchanged.
+---
+
+### 🧩 Module Highlights
+
+#### 🟢 `conv3x3.v`
+
+* Performs **3×3 convolution** on 8-bit pixel inputs.
+* Operates over **9 clock cycles** per convolution window.
+
+#### 🟣 `relu.v`
+
+* Implements **ReLU activation**:
+  [
+  f(x) = \begin{cases}
+  0, & x < 0 \
+  x, & x \geq 0
+  \end{cases}
+  ]
+
+#### 🔵 `max_pool_2x2.v`
+
+* Applies **2×2 max pooling** for dimensionality reduction and feature enhancement.
+
+---
+
+### 🧾 Future Enhancements
+
+* Add **parameterized kernel sizes** (e.g., 5×5)
+* Integrate **multiple convolution layers**
+* Support for **multi-channel inputs (RGB)**
+* Implement **fixed-point quantization** for improved FPGA efficiency
+
+---
+
+### 🏁 Conclusion
+
+This project showcases how **CNN inference can be achieved in hardware**, bridging the gap between **AI algorithms and FPGA-based digital systems**.
+It serves as a strong foundation for further research and development in **hardware-accelerated machine learning**.
+
+---
+
+### 💡 Author
+
+**Pranav J**
+📘 *Electronics and Communication Engineering @ VIT Chennai*
+💻 Passionate about Digital Design | FPGA | Embedded Systems | AI Hardware
+
+---
+
+Would you like me to make a **README version with Markdown badges** (for FPGA tool, language, status, etc.) — like a professional open-source project? It’ll make it look even more polished on GitHub.
+
 
 max_pool_2x2.v
 Takes four 32-bit signed inputs and outputs the maximum value, implementing a 2x2 max pooling.
