@@ -44,8 +44,8 @@ FPGA-Based-CNN-Accelerator/
 ├── conv3x3.v          # 3x3 Convolution module
 ├── relu.v             # ReLU activation module
 ├── max_pool_2x2.v     # 2x2 Max pooling module
-├── cnn_pipeline.v     # Top-level CNN pipeline integration
-├── tb_cnn_pipeline.v  # Testbench for full CNN pipeline
+├── AI_ENHANCER_FULL.v     # Top-level CNN pipeline integration
+├── AI_ENHANCER_FULL_TB.v  # Testbench for full CNN pipeline
 └── README.md          # Project documentation
 ```
 
@@ -62,8 +62,8 @@ FPGA-Based-CNN-Accelerator/
 
 1. Create a new project in **Xilinx ISE** targeting your FPGA board.
 2. Add all Verilog source files listed above.
-3. Set **`cnn_pipeline.v`** as the *top-level module* for synthesis.
-4. Set **`tb_cnn_pipeline.v`** as the *simulation top module*.
+3. Set **`AI_ENHANCER_FULL.v`** as the *top-level module* for synthesis.
+4. Set **`AI_ENHANCER_FULL_TB.v`** as the *simulation top module*.
 
 ---
 
