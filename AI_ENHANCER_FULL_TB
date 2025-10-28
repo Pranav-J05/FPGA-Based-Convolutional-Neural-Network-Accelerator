@@ -1,0 +1,52 @@
+`timescale 1ns / 1ps
+module AI_ENHANCER_FULL_TB;
+	reg clk;
+    reg rst;
+    reg enable;
+    reg signed [8*9-1:0] pixel_window;
+    reg signed [8*9-1:0] kernel;
+    wire signed [31:0] pooled_out;
+    wire done;
+	 
+    AI_ENHANCER_FULL uut (
+        .clk(clk),
+        .rst(rst),
+        .enable(enable),
+        .pixel_window(pixel_window),
+        .kernel(kernel),
+        .pooled_out(pooled_out),
+        .done(done)
+    );
+ initial clk = 0;
+  always #5 clk = ~clk;
+
+    initial begin
+        // Initialize inputs
+        rst = 1;
+        enable = 0;
+        pixel_window = 0;
+        kernel = 0;
+		  #20 rst = 0;
+
+        // Provide test input: pixels 1 to 9
+        pixel_window = {8'd1, 8'd2, 8'd3,
+                        8'd4, 8'd5, 8'd6,
+                        8'd7, 8'd8, 8'd9};
+		 kernel = {8'd1, 8'd1, 8'd1,
+                  8'd1, 8'd1, 8'd1,
+                  8'd1, 8'd1, 8'd1};
+		enable = 1;
+
+        // Wait for convolution + activation + pooling to finish
+        wait(done == 1);
+        @(posedge clk);  // Wait one clock cycle for pooled_out to update
+
+        // Display pooled output
+        $display("Pooled output: %d", pooled_out);
+
+        // End simulation
+        #20 $stop;
+    end
+
+
+endmodule
