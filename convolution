@@ -1,0 +1,61 @@
+timescale 1ns / 1ps
+module cnn( 
+    input clk,
+    input rst,
+    input enable,
+    input signed [8*9-1:0] pixel_window,  // 9 pixels x 8 bits
+    input signed [8*9-1:0] kernel,        // 9 kernel weights x 8 bits
+    output reg signed [31:0] conv_out,
+    output reg done
+);
+    integer count;
+
+    wire signed [7:0] px[0:8];
+    wire signed [7:0] kr[0:8];
+
+    reg signed [15:0] mult_reg;
+    reg signed [31:0] acc;
+    reg mult_ready;
+ genvar i;
+    generate
+        for (i = 0; i < 9; i = i + 1) begin : unpack
+            assign px[i] = pixel_window[(8*(8 - i) + 7) -: 8];
+            assign kr[i] = kernel[(8*(8 - i) + 7) -: 8];
+        end
+    endgenerate
+always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            count <= 0;
+            acc <= 0;
+            conv_out <= 0;
+            done <= 0;
+            mult_reg <= 0;
+            mult_ready <= 0;
+        end else if (enable) begin
+            if (count < 9) begin
+                mult_reg <= px[count] * kr[count];
+                mult_ready <= 1;
+                if (mult_ready)
+                    acc <= acc + mult_reg;
+count <= count + 1;
+                done <= 0;
+            end else begin
+                if (mult_ready) begin
+                    acc <= acc + mult_reg;
+                    mult_ready <= 0;
+                end else begin
+                    conv_out <= acc;
+                    done <= 1;
+                    acc <= 0;
+                    count <= 0;
+                end
+					 end
+        end else begin
+            done <= 0;
+            acc <= 0;
+            count <= 0;
+            mult_ready <= 0;
+            mult_reg <= 0;
+        end
+    end
+endmodule
