@@ -1,24 +1,28 @@
 # FPGA-Based-Convolutional-Neural-Network-Accelerator
 
 
-⚙️ FPGA-Based Convolutional Neural Network (CNN) Accelerator
-
-🚀 Overview
-
-This project implements a hardware-accelerated Convolutional Neural Network (CNN) on an FPGA using Verilog HDL.
-It demonstrates real-time image feature extraction using three fundamental CNN operations — Convolution, ReLU activation, and Max Pooling — all realized in synthesizable RTL.
-
-🧠 Core Features
-
-* 🧩 Modular Verilog Design – Clean, parameterized modules for each CNN operation
-* 🔁 Pipeline Integration – End-to-end data flow through convolution, activation, and pooling
-* ⚡ Synthesizable RTL – Verified for FPGA implementation using Xilinx ISE
-* 🧪 Functional Testbenches – Behavioral simulation and validation of CNN output
-* 🖼️ Hardware Image Processing – Demonstrates real-time CNN inference on FPGA hardware
+Absolutely! Here’s an **enhanced and more professional version** of your GitHub README — formatted cleanly, visually structured, and more engaging for readers. It uses proper Markdown styling, headings, emojis, and concise yet impactful phrasing 👇
 
 ---
 
-🏗️ Architecture Overview
+# ⚙️ FPGA-Based Convolutional Neural Network (CNN) Accelerator
+
+### 🚀 Overview
+
+This project implements a **hardware-accelerated Convolutional Neural Network (CNN)** on an **FPGA** using **Verilog HDL**.
+It demonstrates real-time **image feature extraction** using three fundamental CNN operations — **Convolution**, **ReLU activation**, and **Max Pooling** — all realized in synthesizable RTL.
+
+### 🧠 Core Features
+
+* 🧩 **Modular Verilog Design** – Clean, parameterized modules for each CNN operation
+* 🔁 **Pipeline Integration** – End-to-end data flow through convolution, activation, and pooling
+* ⚡ **Synthesizable RTL** – Verified for FPGA implementation using Xilinx ISE
+* 🧪 **Functional Testbenches** – Behavioral simulation and validation of CNN output
+* 🖼️ **Hardware Image Processing** – Demonstrates real-time CNN inference on FPGA hardware
+
+---
+
+### 🏗️ Architecture Overview
 
 The accelerator performs CNN computation in three key stages:
 
@@ -32,7 +36,7 @@ All modules are integrated in `cnn_pipeline.v` to form the complete CNN data pat
 
 ---
 
-📂 Directory Structure
+### 📂 Directory Structure
 
 ```
 FPGA-Based-CNN-Accelerator/
@@ -47,19 +51,19 @@ FPGA-Based-CNN-Accelerator/
 
 ---
 
-🧰 Getting Started
+### 🧰 Getting Started
 
-🖥️ Prerequisites
+#### 🖥️ Prerequisites
 
-* Xilinx ISE (or compatible FPGA toolchain)
-* Basic understanding of Verilog HDL and digital system design
+* **Xilinx ISE** (or compatible FPGA toolchain)
+* Basic understanding of **Verilog HDL** and **digital system design**
 
-⚙️ Setup Instructions
+#### ⚙️ Setup Instructions
 
-1. Create a new project in Xilinx ISE targeting your FPGA board.
+1. Create a new project in **Xilinx ISE** targeting your FPGA board.
 2. Add all Verilog source files listed above.
-3. Set `cnn_pipeline.v` as the top-level module for synthesis.
-4. Set `tb_cnn_pipeline.v` as the *simulation top module.
+3. Set **`cnn_pipeline.v`** as the *top-level module* for synthesis.
+4. Set **`tb_cnn_pipeline.v`** as the *simulation top module*.
 
 ---
 
@@ -110,15 +114,9 @@ It serves as a strong foundation for further research and development in **hardw
 
 ---
 
-### 💡 Author
 
-**Pranav J**
-📘 *Electronics and Communication Engineering @ VIT Chennai*
-💻 Passionate about Digital Design | FPGA | Embedded Systems | AI Hardware
 
----
 
-Would you like me to make a **README version with Markdown badges** (for FPGA tool, language, status, etc.) — like a professional open-source project? It’ll make it look even more polished on GitHub.
 
 
 max_pool_2x2.v
